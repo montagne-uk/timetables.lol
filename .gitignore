@@ -1,8 +1,6 @@
 *.sqlite
-passwords.json
 
-timetables/*_settings.py
-!timetables/test_settings.py
+timetables/config/secrets.py
 
 .devcontainer/data/*
 **/migrations/*

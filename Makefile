@@ -8,7 +8,7 @@ help: ## Shows this help prompt
 	@awk -F ':|##' '/^[^\t].+?:.*?##/ {printf "\033[36m%-30s\033[0m %s\n", $$1, $$NF }' $(MAKEFILE_LIST)
 
 run: ## Runs the application
-	./manage.py runserver 0.0.0.0:8080
+	DJANGO_SETTINGS_MODULE=timetables.config.local ./manage.py runserver 0.0.0.0:8080
 
 gunicorn: ## Runs the application under gunicorn
 	gunicorn gubbins.wsgi
@@ -43,6 +43,7 @@ superuser: ## Sets up the development superuser (admin/admin)
 	DJANGO_SUPERUSER_EMAIL=admin@example.com DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_PASSWORD=admin python manage.py createsuperuser --noinput	
 
 install: ## Install dependencies
+	touch timetables/config/secrets.py
 	python3 -m pip install --user -r requirements.txt
 
 database: ## Rebuilds the database, creating migrations
